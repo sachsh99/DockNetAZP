@@ -37,3 +37,12 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
+  # Add the below steps to push the image to AzureWebAppContainer
+    - task: AzureWebAppContainer@1
+      displayName: 'Azure Web App on Container Deploy'
+      inputs:
+        azureSubscription: $(azureSubscription)
+        appName: ${webAppName}
+        containers: '$(containerRegistry)/$(imageRepository):$(tag)'
+        isLinuxApp: true
