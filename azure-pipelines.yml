@@ -45,6 +45,6 @@ stages:
       displayName: 'Azure Web App on Container Deploy'
       inputs:
         azureSubscription: $(azureSubscription)
-        appName: ${appName}
+        appName: $(appName)
         containers: '$(containerRegistry)/$(imageRepository):$(tag)'
         isLinuxApp: true
