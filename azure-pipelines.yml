@@ -73,8 +73,7 @@ stages:
     displayName: 'Deploy Job'
     pool:
       vmImage: $(vmImageName)
-    variables:
-    - group: Release
+    
     steps:
     - task: AzureWebAppContainer@1
       displayName: 'Azure Web App on Container Deploy'
