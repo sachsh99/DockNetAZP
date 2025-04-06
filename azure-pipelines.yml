@@ -64,7 +64,18 @@ stages:
         SecretsFilter: '*'
         RunAsPreJob: true
 
-  # Add the below steps to push the image to AzureWebAppContainer
+- stage: Deploy
+  displayName: 'Deploy the container'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy Job'
+    pool:
+      vmImage: $(vmImageName)
+    variables:
+    - group: Release
+    steps:
     - task: AzureWebAppContainer@1
       displayName: 'Azure Web App on Container Deploy'
       inputs:
