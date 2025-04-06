@@ -11,7 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   azureSubscription: 'ARM_acrtest'
-  appName: 'dcknetazp'
+  appName: 'ducknetazp'
   dockerRegistryServiceConnection: '9ad23b76-a67a-489f-ac31-f7963b4f5fb5'
   imageRepository: 'sachshdocknetazp'
   containerRegistry: 'acrreg34.azurecr.io'
