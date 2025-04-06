@@ -62,7 +62,7 @@ stages:
         azureSubscription: $(azureSubscription)
         KeyVaultName: 'acrvault32432'
         SecretsFilter: '*'
-        RunAsPreJob: false
+        RunAsPreJob: true
 
   # Add the below steps to push the image to AzureWebAppContainer
     - task: AzureWebAppContainer@1
