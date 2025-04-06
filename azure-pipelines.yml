@@ -21,30 +21,6 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-steps:
-- task: AzureCLI@2
-  displayName: 'Azure CLI'
-  inputs:
-    azureSubscription: $(azureSubscription)
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      echo "Hello, Azure CLI!"
-      echo "Container Registry: $(containerRegistry)"
-      echo "Image Repository: $(imageRepository)"
-      echo "Dockerfile Path: $(dockerfilePath)"
-      echo "Tag: $(tag)"
-    workingDirectory: '$(Build.SourcesDirectory)'
-    failOnStandardError: true
-
-- task: AzureKeyVault@2
-  displayName: 'Azure Key Vault'
-  inputs:
-    azureSubscription: $(azureSubscription)
-    KeyVaultName: 'acrvault32432'
-    SecretsFilter: '*'
-    RunAsPreJob: true
-
 stages:
 - stage: Build
   displayName: Build and push stage
@@ -63,6 +39,29 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
+    - task: AzureCLI@2
+      displayName: 'Azure CLI'
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          echo "Hello, Azure CLI!"
+          echo "Container Registry: $(containerRegistry)"
+          echo "Image Repository: $(imageRepository)"
+          echo "Dockerfile Path: $(dockerfilePath)"
+          echo "Tag: $(tag)"
+        workingDirectory: '$(Build.SourcesDirectory)'
+        failOnStandardError: true
+
+    - task: AzureKeyVault@2
+      displayName: 'Azure Key Vault'
+      inputs:
+        azureSubscription: $(azureSubscription)
+        KeyVaultName: 'acrvault32432'
+        SecretsFilter: '*'
+        RunAsPreJob: true
 
   # Add the below steps to push the image to AzureWebAppContainer
     - task: AzureWebAppContainer@1
