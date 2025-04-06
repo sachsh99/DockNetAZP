@@ -11,6 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   azureSubscription: 'ARM_acrtest'
+  azSub: 'sub_az104'
   appName: 'ducknetazp'
   containerRegistry: 'acrreg34.azurecr.io'
   dockerRegistryServiceConnection: '9ad23b76-a67a-489f-ac31-f7963b4f5fb5'
@@ -43,7 +44,7 @@ stages:
     - task: AzureCLI@2
       displayName: 'Azure CLI'
       inputs:
-        azureSubscription: $(azureSubscription)
+        azureSubscription: $(azSub)
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
@@ -61,7 +62,7 @@ stages:
         azureSubscription: $(azureSubscription)
         KeyVaultName: 'acrvault32432'
         SecretsFilter: '*'
-        RunAsPreJob: true
+        RunAsPreJob: false
 
   # Add the below steps to push the image to AzureWebAppContainer
     - task: AzureWebAppContainer@1
