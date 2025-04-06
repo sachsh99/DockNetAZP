@@ -80,5 +80,5 @@ stages:
       inputs:
         azureSubscription: $(azureSubscription)
         appName: $(appName)
-        containers: '$(containerRegistry)/$(imageRepository):$(tag)'
+        imagename: '$(containerRegistry)/$(imageRepository):$(tag)'
         isLinuxApp: true
