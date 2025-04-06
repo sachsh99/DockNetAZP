@@ -10,6 +10,8 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
+  azureSubscription: 'sub_az104'
+  appName: 'sachshwebappazp'
   dockerRegistryServiceConnection: '9ad23b76-a67a-489f-ac31-f7963b4f5fb5'
   imageRepository: 'sachshdocknetazp'
   containerRegistry: 'acrreg34.azurecr.io'
@@ -43,6 +45,6 @@ stages:
       displayName: 'Azure Web App on Container Deploy'
       inputs:
         azureSubscription: $(azureSubscription)
-        appName: ${webAppName}
+        appName: ${appName}
         containers: '$(containerRegistry)/$(imageRepository):$(tag)'
         isLinuxApp: true
